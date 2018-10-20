@@ -26,7 +26,7 @@
             <tr>
 
                 <td>{{ $shop->id }}</td>
-                <td>{{ $shop->shop_category_id }}</td>
+                <td>{{ $shop->shopcate->name }}</td>
                 <td>{{ $shop->shop_name }}</td>
                 <td><img src="{{\Illuminate\Support\Facades\Storage::url($shop->shop_img)}}" alt=""></td>
                 <td>{{ $shop->shop_rating }}</td>
@@ -42,7 +42,6 @@
                 <td>{{ $shop->discount }}</td>
                 <td>{{ $shop->status }}</td>
                 <td>
-                    <a href="{{ route('shopmanager.verify') }}" class="btn btn-info">审核</a>
                     <a href="{{ route('shopmanagers.edit',[$shop]) }}" class="btn btn-warning">修改</a>
                     <form action="{{ route('shopmanagers.destroy',[$shops]) }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}

@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Auth\Middleware\Authenticate;
 
 
-class Admin extends Authenticate
+class Admin extends Authenticatable
 {
-    //
+    protected $fillable = [
+      'name','password','email','remember_token'
+    ];
 }

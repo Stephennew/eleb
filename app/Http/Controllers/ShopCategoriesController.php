@@ -6,7 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Model\ShopCategory;
 
-class ShopCategories extends Controller
+class ShopCategoriesController extends Controller
 {
     public function index()
     {

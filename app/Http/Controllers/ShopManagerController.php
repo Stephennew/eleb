@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Model\Shop;
+use App\Model\ShopCategory;
 use App\User;
 use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class ShopManager extends Controller
+class ShopManagerController extends Controller
 {
     public function index()
     {
@@ -107,8 +109,44 @@ class ShopManager extends Controller
         
     }
 
-    public function verify(User $user)
+    //平台可以直接添加商家信息和账户，默认已审核通过
+    public function register()
     {
-
+        //获取所有的分类
+        $data = ShopCategory::all();
+        return view('shopmanager.register',compact('data'));
     }
+
+    public function registerStore(Request $request)
+    {
+        $shop_img_path = $request->file('shop_img')->store('public/shops');
+        $user_data = [
+            'name'=>$request->name,
+            'password'=>bcrypt($request->password),
+            'email'=>$request->email,
+            'remember_token'=> str_random(40),
+            'status'=>'1',
+        ];
+        $shops_data = [
+            'shop_category_id'=>$request->shop_category_id,
+            'shop_name'=>$request->shop_name,
+            'shop_img'=>$shop_img_path,
+            'brand'=>$request->has('brand') ?? 0,
+            'on_time'=>$request->has('on_time') ?? 0,
+            'fengniao'=>$request->has('fengniao') ?? 0,
+            'piao'=>$request->has('piao') ?? 0,
+            'zhun'=>$request->has('zhun') ?? 0,
+            'bao'=>$request->has('bao') ?? 0,
+            'status'=>'1'
+        ];
+
+        //同时写入数据库，做事务处理
+        DB::transaction(function () use ($user_data,$shops_data){
+            $shop = Shop::create($shops_data);
+            $user_data['shop_id'] = $shop->id;
+            User::create($user_data);
+        });
+        return redirect()->route('shopmanagers.index')->with('success','添加商家账号信息成功');
+    }
+
 }

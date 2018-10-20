@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Http\Controllers\ShopCategoriesController;
 use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
@@ -23,4 +24,10 @@ class Shop extends Model
         'discount',
         'status',
     ];
+
+    //一个商家 只能有一个分类
+    public function shopcate()
+    {
+        return $this->belongsTo(ShopCategory::class,'shop_category_id','id');
+    }
 }
