@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('shopcates','ShopCategories');
+
+Route::resource('shopmanagers','ShopManager');
+Route::get('verify','ShopmanagerController@verify')->name('shopmanager.verify');
