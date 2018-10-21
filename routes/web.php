@@ -18,6 +18,11 @@ Route::get('/', function () {
 Route::resource('shopcates','ShopCategoriesController');
 //shops route
 Route::resource('shopmanagers','ShopManagerController');
+
+//后台商家信息审核
+Route::get('shops/verify','ShopManagerController@verify')->name('shops.verify');
+Route::post('shops/verifystore','ShopManagerController@verifyStore')->name('shops.verifystore');
+
 //后台添加商家信息及用户信息
 Route::get('register','ShopManagerController@register')->name('register');
 Route::post('register/store','ShopManagerController@registerStore')->name('register.store');

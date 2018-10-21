@@ -149,4 +149,17 @@ class ShopManagerController extends Controller
         return redirect()->route('shopmanagers.index')->with('success','添加商家账号信息成功');
     }
 
+    public function verify(Request $request)
+    {
+        $shop = Shop::find($request->id);
+        return view('shopmanager.verify',compact('shop'));
+    }
+
+    public function verifyStore(Request $request)
+    {
+        $data = Shop::find($request->id);
+        $data->where('id',$request->id)->update(['status'=>$request->status]);
+        return redirect()->route('shopmanagers.index')->with('success','审核成功');
+
+    }
 }

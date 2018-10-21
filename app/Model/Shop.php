@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Http\Controllers\ShopCategoriesController;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
@@ -29,5 +30,11 @@ class Shop extends Model
     public function shopcate()
     {
         return $this->belongsTo(ShopCategory::class,'shop_category_id','id');
+    }
+
+    //一个商家，对应一个用户信息
+    public function shopuser()
+    {
+        return $this->hasOne(User::class);
     }
 }

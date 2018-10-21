@@ -40,8 +40,9 @@
                 <td>{{ $shop->send_cost }}</td>
                 <td>{{ $shop->notice }}</td>
                 <td>{{ $shop->discount }}</td>
-                <td>{{ $shop->status }}</td>
+                <td>@if($shop->status) 正常 @elseif(!$shop->status) 待审核 @else 禁用 @endif</td>
                 <td>
+                    <a href="{{ route('shops.verify',['id'=>$shop->id]) }}" class="btn btn-info">商家信息审核</a>
                     <a href="{{ route('shopmanagers.edit',[$shop]) }}" class="btn btn-warning">修改</a>
                     <form action="{{ route('shopmanagers.destroy',[$shops]) }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}

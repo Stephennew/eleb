@@ -1,5 +1,7 @@
 @extends('layout.default')
 @section('contents')
+    @include('layout._notice')
+    @include('layout._errors')
     <form action="{{ route('session.store',['id'=>$admin->id]) }}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="">用户名</label>

@@ -61,8 +61,14 @@ class SessionController extends Controller
         $admin = Admin::find($request->id);
         if(Hash::check($request->oldpassword,$admin->password)){
             if($request->password == $request->repassword){
+                Auth::logout();
                 $admin->where('id',$admin->id)->update(['password'=>bcrypt($request->password)]);
+                return redirect()->route('session.login')->with('success','修改密码成功，一定要记住哦');
+            }else{
+                return back()->with('danger','确认密码与新密码不一致')->exceptInput();
             }
+        }else{
+            return back()->with('danger','您输入的密码错误，请重新输入')->withInput();
         }
         Auth::logout();//删除session 退出
         return redirect()->route('session.login')->with('success','修改密码成功');
