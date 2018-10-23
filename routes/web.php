@@ -42,3 +42,6 @@ Route::post('session/verify','SessionController@verify')->name('session.verify')
 Route::get('session/logout','SessionController@logout')->name('session.logout');
 Route::get('session/edit','SessionController@edit')->name('session.edit');
 Route::post('session/store','SessionController@store')->name('session.store');
+
+//activity route
+Route::resource('activities','ActivityController');
