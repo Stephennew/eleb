@@ -45,3 +45,37 @@ Route::post('session/store','SessionController@store')->name('session.store');
 
 //activity route
 Route::resource('activities','ActivityController');
+
+//upload route
+Route::post('/upload','UploaderController@Upload')->name('upload');
+//oss route
+//Route::get('/oss',function (){
+    //$client = App::make('aliyun-oss');
+    /*$client->putObject(getenv('OSS_BUCKET'), "1.txt","你好");
+    $result = $client->getObject(getenv('OSS_BUCKET'), "1.txt");
+    echo $result;*/
+    //try{
+        //D:\www\eleb\public\storage\shopcategories\aXJ4AgyIzwyfZcIWMSsGTpubIgDL9ScMRYR1HeK4.png
+        //D:\www\eleb\storage\app\public\shopcategories\aXJ4AgyIzwyfZcIWMSsGTpubIgDL9ScMRYR1HeK4.png
+        //$client->uploadFile(getenv('OSS_BUCKET'),'public\shopcategories\aXJ4AgyIzwyfZcIWMSsGTpubIgDL9ScMRYR1HeK4.png',storage_path(
+         //   'app\public\shopcategories\aXJ4AgyIzwyfZcIWMSsGTpubIgDL9ScMRYR1HeK4.png'));
+       // echo '上传成功';
+
+        //其他地方要访问OSS中的内容拼接  https://laravel-elebshop.oss-cn-beijing.aliyuncs.com/
+   // }catch (\OSS\Core\OssException $e){
+      //  echo '上传失败';
+     //   printf($e->getMessage() . "\n");
+    //}
+//});
+
+//events route
+Route::resource('events','EventController');
+
+//抽奖
+Route::get('events/lottery/{event}','EventController@lottery')->name('events.lottery');
+
+//event_prizes route
+Route::resource('eventprizes','EventPrizeController');
+
+//event_members route
+Route::get('eventmembers','EventMemberController@index');

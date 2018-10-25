@@ -101,7 +101,8 @@ class ShopManagerController extends Controller
     public function destroy(Shop $shopmanager)
     {
         $shopmanager->delete();
-        return redirect()->route('shopmanagers.index')->with('success','删除成功');
+        return 'success';
+        //return redirect()->route('shopmanagers.index')->with('success','删除成功');
     }
 
     public function show()

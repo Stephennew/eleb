@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    //构建中间件
+    public function __construct()
+    {
+        $this->middleware('auth',[
+
+        ]);
+    }
     public function index()
     {
         $users = User::paginate(1);
@@ -36,6 +43,12 @@ class UserController extends Controller
     public function show()
     {
 
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return 'success';
     }
 
     //审核账号是否可用

@@ -1,7 +1,7 @@
 @extends('layout.default')
 @section('contents')
     @include('layout._notice')
-    <a href="{{ route('users.create') }}">添加商家用户</a>
+    <a href="{{ route('users.create') }}" class="btn btn-info">添加商家用户</a>
     <table class="table table-responsive">
         <tr>
             <td>编号</td>
@@ -25,15 +25,40 @@
                     <a href="{{ route('verify',['id'=>$user->id]) }}" class="btn btn-info">审核</a>
                     <a href="{{ route('reset',['id'=>$user->id]) }}" class="btn btn-danger">重置密码</a>
                     <a href="{{ route('users.edit',[$user]) }}" class="btn btn-warning">修改</a>
-                    <form action="{{ route('users.destroy',[$user]) }}" method="post" enctype="multipart/form-data">
+                    {{--<form action="{{ route('users.destroy',[$user]) }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-danger">删除</button>
-                    </form>
+                    </form>--}}
+                    <a href="javascript:;" data-href="{{ route('users.destroy',[$user]) }}" class="del_btn btn btn-danger">删除</a>
                 </td>
             </tr>
         @endforeach
     </table>
     {{ $users->links() }}
+    <script src="/js/jQuery.js"></script>
+    <script>
+        $('.del_btn').click(function () {
+            var btn = $(this);
+            var url = btn.data('href');
+            if(confirm('你确定要删除么？删除之后不可恢复！')){
+                $.ajax({
+                    type:'DELETE',
+                    url:url,
+                    data:{
+                        _token:"{{ csrf_token() }}"
+                    },
+                    success:function (msg) {
+                        if(msg == 'success'){
+                            alert('删除成功');
+                            btn.closest('tr').fadeout();
+                        }else{
+                            alert('删除失败');
+                        }
+                    }
+                })
+            }
+        })
+    </script>
 @endsection
 

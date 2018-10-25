@@ -165,7 +165,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Overtrue\LaravelUEditor\UEditorServiceProvider::class,
-        //Jacobcyl\AliOSS\AliOssServiceProvider::class,
+        Jacobcyl\AliOSS\AliOssServiceProvider::class,
+
 
 
         /*
@@ -231,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'UEditor'=>Overtrue\LaravelUEditor\UEditorServiceProvider::class,
+
     ],
 
 ];

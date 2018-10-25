@@ -22,13 +22,19 @@ class ShopCategoriesController extends Controller
     public function store(Request $request)
     {
         //验证数据
-        $img_path = $request->file('img')->store('public/shopcategories');
+        //var_dump($_POST);exit;
+        $this->validate($request,[
+           'name'=>'required',
+           'img'=>'required',
+           'status'=>'required',
+        ]);
+        //$img_path = $request->file('img')->store('public/shopcategories');
         ShopCategory::create([
             'name'=>$request->name,
-            'img'=>$img_path,
+            'img'=>$request->img,
             'status'=>$request->status,
         ]);
-        return redirect()->route('shopcate.index')->with('success','添加成功');
+        return redirect()->route('shopcates.index')->with('success','添加成功');
     }
 
     public function edit(Request $request,ShopCategory $shopcate)
@@ -39,19 +45,25 @@ class ShopCategoriesController extends Controller
     public function update(Request $request,ShopCategory $shopcate)
     {
         //验证数据
-
+        $this->validate($request,[
+            'name'=>'required',
+            'status'=>'required',
+        ],[
+            'name.required'=>'分类名称不能为空',
+            'status.required'=>'分类状态不能为空',
+        ]);
         $data = [
             'name'=>$request->name,
             'status'=>$request->status,
         ];
-        if($request->has('img') != null)
+       if($request->img != null)
         {
             $this->validate($request,[
-                'img'=>'required|image'
+                'img'=>'required'
             ],[
-                'img.required'=>'图片'
+                'img.required'=>'图片不能为空'
             ]);
-            $data['img'] = $request->file('img')->store('public/shopcategories');
+            $data['img'] = $request->img;
         }
         $shopcate->update($data);
         return redirect()->route('shopcates.index')->with('success','修改成功');
@@ -60,6 +72,7 @@ class ShopCategoriesController extends Controller
     public function destroy(ShopCategory $shopcate)
     {
         $shopcate->delete();
-        return redirect()->route('shopcates.index')->with('success','删除成功');
+        //return redirect()->route('shopcates.index')->with('success','删除成功');
+        return 'success';
     }
 }
