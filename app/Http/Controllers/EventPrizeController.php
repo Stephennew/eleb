@@ -17,7 +17,7 @@ class EventPrizeController extends Controller
 
     public function create()
     {
-        //活动开奖之前可以为该活动添加添加奖品，开奖后只有不可以添加
+        //活动开奖之前可以为该活动添加添加奖品，开奖后不可以添加
         $totime = date('Y-m-d',time());
         $data = Events::where(function ($query) use ($totime){
                 $query->where('prize_date','>',$totime);

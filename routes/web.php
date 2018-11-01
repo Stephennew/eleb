@@ -79,3 +79,15 @@ Route::resource('eventprizes','EventPrizeController');
 
 //event_members route
 Route::get('eventmembers','EventMemberController@index');
+
+//member route
+Route::prefix('member')->group(function (){
+    Route::get('index','MemberController@index')->name('member.index');
+    Route::get('view/{id}','MemberController@view')->name('member.view');
+    Route::get('disable/{id}','MemberController@disable')->name('member.disable');
+});
+
+Route::prefix('index')->group(function (){
+   Route::get('orders','IndexController@orders')->name('index.orders');
+   Route::get('shops','IndexController@shops')->name('index.shops');
+});
