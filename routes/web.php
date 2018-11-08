@@ -91,3 +91,17 @@ Route::prefix('index')->group(function (){
    Route::get('orders','IndexController@orders')->name('index.orders');
    Route::get('shops','IndexController@shops')->name('index.shops');
 });
+
+//权限 permissions route
+Route::prefix('rbac')->group(function (){
+   Route::get('list','PermissionController@index')->name('rbac.list');
+   Route::get('add','PermissionController@create')->name('rbac.add');
+   Route::post('store','PermissionController@store')->name('rbac.store');
+   Route::get('edit/{permission}','PermissionController@edit')->name('rbac.edit');
+   Route::post('update/{permission}','PermissionController@update')->name('rbac.update');
+   Route::get('destroy/{permission}','PermissionController@destroy')->name('rbac.destroy');
+});
+
+//角色 role route
+
+Route::resource('role','RoleController');

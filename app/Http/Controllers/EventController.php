@@ -52,7 +52,6 @@ class EventController extends Controller
 
     public function update(Request $request,Events $event)
     {
-        //var_dump($_POST);exit;
         $this->validate($request,[
             'title'=>'required',
             'content'=>'required',
