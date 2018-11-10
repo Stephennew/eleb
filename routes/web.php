@@ -105,3 +105,16 @@ Route::prefix('rbac')->group(function (){
 //角色 role route
 
 Route::resource('role','RoleController');
+
+//navs route
+Route::prefix('nav')->group(function (){
+   Route::get('index','NavController@index')->name('nav.index');
+   Route::get('create','NavController@create')->name('nav.create');
+   Route::post('store','NavController@store')->name('nav.store');
+   Route::get('edit/{nav}','NavController@edit')->name('nav.edit');
+   Route::get('update/{nav}','NavController@update')->name('nav.update');
+   Route::get('destroy/{nav}','NavController@destroy')->name('nav.destroy');
+});
+
+//Shpinx route
+Route::get('sphinx','SphinxController@sphinx')->name('sphinx');
