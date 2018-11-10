@@ -75,7 +75,7 @@ class AdminController extends Controller
             }
         }
         $admin->update($data);
-        $admin->assignRole($request->roles);
+        $admin->syncRoles($request->roles);
         return redirect()->route('admins.index')->with('success','修改用户信息成功');
 
     }

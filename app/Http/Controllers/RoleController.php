@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Model\Permission;
 use App\Model\RoleHasPermission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
@@ -34,6 +36,9 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
+        if(!Auth::user()->can('/rbac/edit/{permission}')){
+            return '没有权限';
+        }
         $permissions = Permission::all();
         $roles = $role->permissions; //获取当前所有角色的所有权限
         return view('role.edit',compact('role','permissions','roles'));
@@ -49,6 +54,9 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
+        if(!Auth::user()->can('/rbac/destroy/{permission}')){
+            return '没有权限';
+        }
         $role->delete();
         return 'success';
     }

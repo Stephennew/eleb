@@ -11,8 +11,12 @@
                 <td>{{ $role->name }}</td>
                 <td>{{ $role->guard_name }}</td>
                 <td>
+                    @can('/role/{role}/edit')
                     <a href="{{ route('role.edit',[$role]) }}" class="btn btn-warning">修改</a>
+                    @endcan
+                    @can('/role/{role}')
                     <a href="javascript:;" data-href="{{ route('role.destroy',[$role]) }}" class="del_btn btn btn-danger">删除</a>
+                    @endcan
                 </td>
             </tr>
         @endforeach

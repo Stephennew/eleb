@@ -21,4 +21,5 @@
             </tr>
         @endforeach
     </table>
+    {{ $menus->links() }}
 @endsection

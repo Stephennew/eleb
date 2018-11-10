@@ -21,18 +21,25 @@ class SessionController extends Controller
            'password'=>'required',
            'captcha'=>'required|captcha',
         ],[
-            'name.reuqired'=>'账号不能为空',
+            'name.required'=>'账号不能为空',
             'password.required'=>'密码不能为空',
             'captcha.required'=>'验证码不能为空',
             'captcha.captcha'=>'验证码不正确',
         ]);
-        //这里的Auth 直接去config/auth.php 文件中Providers（提供者）里面去找对应模型，获取该模型（模型与表对应）里面的数据进行验证
-        if(Auth::attempt(['name'=>$request->name,'password'=>$request->password],$request->has('remember')))
-        {
-            return redirect()->intended(route('shopmanagers.index'))->with('success','登陆成功');
+        //var_dump($_POST);exit;
+        if(Auth::attempt(['name'=>$request->name,'password'=>$request->password],$request->has('remember'))){
+            return redirect()->route('shopmanagers.index')->with('success','登录成功');
         }else{
             return back()->with('danger','用户名或密码错误')->withInput();
         }
+        //这里的Auth 直接去config/auth.php 文件中Providers（提供者）里面去找对应模型，获取该模型（模型与表对应）里面的数据进行验证
+        /*if(Auth::attempt(['name'=>$request->name,'password'=>$request->password],$request->has('remember')))
+        {
+            return redirect()->route('shopmanagers.index')->with('success','登录成功');
+            //return redirect()->intended(route('shopmanagers.index'))->with('success','登陆成功');
+        }else{
+            return back()->with('danger','用户名或密码错误')->withInput();
+        }*/
     }
 
     public function logout()

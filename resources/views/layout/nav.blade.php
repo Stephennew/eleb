@@ -15,7 +15,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 {{--nav模型里面的静态方法生成的导航--}}
-               {!! \App\Model\Nav::getNavs() !!}
+                @if(auth()->user())
+                    {!! \App\Model\Nav::getNavs() !!}
+                @endif
             </ul>
             <form class="navbar-form navbar-left form-box" action="">
                 <div class="form-group">
