@@ -37,4 +37,9 @@ class SphinxController extends Controller
         //print_r($cl);
         dd($res);
     }
+
+    public function nihao()
+    {
+        echo 'hello';
+    }
 }
