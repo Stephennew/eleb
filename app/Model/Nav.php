@@ -20,7 +20,7 @@ class Nav extends Model
                     <ul class="dropdown-menu">';
             $children_navs = self::where('pid',$nav->id)->get();
             foreach ($children_navs as $children_nav){
-                if(Auth::user()->can($children_nav->permission_id))
+                //if(Auth::user()->can($children_nav->permission_id))
                     $html .='<li><a href="'.$children_nav->url.'">'.$children_nav->name.'</a></li>';
             }
             $html .='</ul></li>';
